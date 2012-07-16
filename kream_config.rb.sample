@@ -1,0 +1,23 @@
+require 'tweetstream'
+require 'pusher'
+require 'active_record'
+require 'logger'
+
+ActiveRecord::Base.establish_connection(
+  :adapter => 'sqlite3',
+  :database => 'production.sqlite3'
+)
+
+ActiveRecord::Base.logger = Logger.new("./database.log")
+
+TweetStream.configure do |config|
+  config.consumer_key       = ''
+  config.consumer_secret    = ''
+  config.oauth_token        = ''
+  config.oauth_token_secret = ''
+  config.auth_method        = :oauth
+end
+
+Pusher.app_id = ""
+Pusher.key = ""
+Pusher.secret = ""

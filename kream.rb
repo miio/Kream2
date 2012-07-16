@@ -1,7 +1,6 @@
 #-*- encoding: utf-8 -*- 
-
 require 'sinatra'
-
+require 'erb'
 get '/' do
-	'Kream!'
+	erb :index
 end
