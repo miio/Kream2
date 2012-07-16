@@ -4,6 +4,6 @@ require 'erb'
 require './kream_config.rb'
 
 get '/' do
-	@pusher_key = Pusher.key
-	erb :index
+  @pusher_key = Pusher.key
+  erb :index
 end
