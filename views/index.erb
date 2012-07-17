@@ -19,20 +19,39 @@
 		var channel = pusher.subscribe('broadcast');
 		channel.bind('an_event', function(data) {
 				data = eval(data);
-				$('#timeline').prepend($('<p>').append(data.text).fadeIn('normal'));
+				$profile_img = $('<img>').attr({'src': data.profile_img});
+				$profile_area = $('<div>').attr({'class': 'profile_area'}).append($profile_img);
+				$top_content = $('<div>').attr({'class': 'top_content'}).append(data.text);
+				$bottom_content = $('<div>').attr({'class': 'botton_content'}).append('via :' + data.client);
+				$content = $('<div>').attr({'class': 'line_content', 'id': data.id});
+				$content.append($profile_area).append($top_content).append($bottom_content);
+				$('#timeline').prepend($content.fadeIn('normal'));
 		});
 		</script>
 
 		<style type="text/css">
-		#timeline {
-			margin: 50px 10px 0;
-		}
-		#timeline p {
-			border: 1px solid #ddd;
-		}
+			#timeline {
+				margin: 50px 10px 0;
+			}
+			#timeline .line_content {
+				border: 1px solid #ddd;
+				clear: both;
+			}
+			#timeline .line_content .profile_area {
+				margin: 10px;
+				width: 60px;
+			}
+			#timeline .line_content .top_content,
+			#timeline .line_content .bottom_content {
+				mqrgin-left: 80px;
+			}
+			
+			#timeline .line_content .bottom_content {
+				background-color: #ddd;
+			}
 		</style>
 	</head>
-<body>
+	<body>
 		<div class="topbar">
 			<div class="fill">
 				<div class="container">
@@ -41,12 +60,11 @@
 						<li class="active"><a href="#timeline">Timeline</a></li>
 						<li><a href="#list">Lists</a></li>
 						<li><a href="#contact">Ustream</a></li>
-					</div>
+					</ul>
 				</div>
 			</div>
 
 			<div id="timeline">
-				<p>ダミーのダミー</p>
 			</div>
 		</body>
 	</html>
